@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="在线游戏平台，提供多种类型的免费游戏，包括动作、射击、益智、策略等。立即开始游戏！">
+    <meta name="keywords" content="在线游戏, 免费游戏, Monster Survivors, 动作游戏, 射击游戏, 益智游戏">
+    <meta name="author" content="游戏天地">
+    <link rel="canonical" href="https://gamehub.example.com/">
+    <title>游戏天地 - 免费在线游戏平台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-gray-100 text-gray-900">
+    <!-- 导航栏 -->
+    <nav class="bg-gray-900 text-white py-4">
+        <div class="max-w-6xl mx-auto px-4 flex flex-wrap items-center justify-between">
+            <div class="flex items-center">
+                <a href="#" class="text-2xl font-bold">游戏天地</a>
+            </div>
+            
+            <!-- 导航菜单 -->
+            <div class="hidden md:flex space-x-6">
+                <a href="#" class="hover:text-blue-400">首页</a>
+                <div class="relative group">
+                    <a href="#" class="hover:text-blue-400">游戏分类 <i class="fas fa-chevron-down text-xs ml-1"></i></a>
+                    <div class="absolute left-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg py-2 z-10 hidden group-hover:block">
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-700" data-category="all">全部游戏</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-700" data-category="action">动作游戏</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-700" data-category="shooting">射击游戏</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-700" data-category="puzzle">益智游戏</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-700" data-category="strategy">策略游戏</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-700" data-category="sports">体育游戏</a>
+                    </div>
+                </div>
+                <a href="#" class="hover:text-blue-400" data-filter="hot">热门游戏</a>
+                <a href="#" class="hover:text-blue-400" data-filter="new">新增游戏</a>
+                <a href="#" class="hover:text-blue-400">关于我们</a>
+            </div>
+            
+            <!-- 移动端菜单按钮 -->
+            <div class="md:hidden">
+                <button class="text-white focus:outline-none">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- 搜索框 -->
+            <div class="w-full md:w-auto mt-4 md:mt-0">
+                <div class="relative">
+                    <input type="text" id="searchInput" placeholder="搜索游戏..." class="bg-gray-800 text-white rounded-full py-2 px-4 pl-10 w-full md:w-64 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <header class="text-center py-10 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+        <h1 class="text-4xl font-bold mb-2">游戏天地</h1>
+        <p class="text-lg">海量免费游戏，尽在指尖</p>
+    </header>
+    
+    <main class="max-w-6xl mx-auto p-6">
+        <!-- 特色游戏 -->
+        <section id="featured-game" class="mb-12">
+            <h2 class="text-3xl font-bold mb-6 text-center">特色游戏</h2>
+            <div id="featured-game-container" class="w-full flex justify-center mb-8">
+                <!-- 特色游戏将通过JavaScript动态加载 -->
+            </div>
+        </section>
+        
+        <!-- 游戏分类区域 -->
+        <div id="game-categories">
+            <!-- 游戏分类将通过JavaScript动态加载 -->
+        </div>
+    </main>
+    
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">游戏天地</h3>
+                    <p class="text-gray-400">提供各种类型的免费在线游戏，让您随时随地享受游戏乐趣。</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">游戏分类</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white" data-category="action">动作游戏</a></li>
+                        <li><a href="#" class="hover:text-white" data-category="shooting">射击游戏</a></li>
+                        <li><a href="#" class="hover:text-white" data-category="puzzle">益智游戏</a></li>
+                        <li><a href="#" class="hover:text-white" data-category="strategy">策略游戏</a></li>
+                        <li><a href="#" class="hover:text-white" data-category="sports">体育游戏</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">关于我们</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">关于我们</a></li>
+                        <li><a href="#" class="hover:text-white">联系我们</a></li>
+                        <li><a href="#" class="hover:text-white">隐私政策</a></li>
+                        <li><a href="#" class="hover:text-white">使用条款</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">关注我们</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-weixin"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-weibo"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-qq"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-bilibili"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-6 text-center text-gray-400">
+                <p>&copy; 2025 游戏天地. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- 游戏详情模态框 -->
+    <div id="gameModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg max-w-4xl w-full max-h-screen overflow-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 id="modalGameTitle" class="text-2xl font-bold"></h2>
+                    <button id="closeModal" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div id="modalGameContent" class="w-full">
+                    <!-- 游戏iframe将在这里加载 -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript -->
+    <script>
+        // 游戏数据
+        let games = [];
+        let filteredGames = [];
+        let currentCategory = 'all';
+        
+        // 加载游戏数据
+        async function loadGames() {
+            try {
+                console.log("开始加载游戏数据...");
+                // 替换为您的JSON文件路径
+                const response = await fetch('games_info.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP错误! 状态: ${response.status}`);
+                }
+                
+                const rawData = await response.json();
+                console.log("成功加载JSON数据:", rawData);
+                
+                // 转换数据格式以匹配网站需要的结构
+                if (Array.isArray(rawData)) {
+                    console.log("处理游戏数组...");
+                    games = rawData.map(convertGameFormat);
+                } else if (typeof rawData === 'object' && rawData !== null) {
+                    console.log("处理单个游戏对象...");
+                    games = [convertGameFormat(rawData)];
+                } else {
+                    console.error("无效的JSON数据格式:", rawData);
+                    throw new Error("无效的JSON数据格式");
+                }
+                
+                console.log("转换后的游戏数据:", games);
+                filteredGames = [...games];
+                
+                // 初始化页面
+                displayFeaturedGame();
+                displayGamesByCategory();
+                setupEventListeners();
+            } catch (error) {
+                console.error('加载游戏数据失败:', error);
+                // 如果无法加载JSON，使用示例数据
+                useExampleData();
+            }
+        }
+        
+        // 转换游戏数据格式
+        function convertGameFormat(game) {
+            // 随机分配一个类别，因为您的JSON中没有类别信息
+            const categories = ['action', 'shooting', 'puzzle', 'strategy', 'sports'];
+            const randomCategory = categories[Math.floor(Math.random() * categories.length)];
+            
+            return {
+                id: game.id || `game-${Math.random().toString(36).substr(2, 9)}`,
+                name: game.name || "未命名游戏",
+                chineseName: game.chinese_name || game.name || "未命名游戏", // 如果有中文名则使用，否则使用英文名
+                category: game.category || randomCategory,
+                description: game.description || "暂无描述",
+                imageUrl: game.image_url || game.local_image_path || "https://via.placeholder.com/400x225?text=No+Image",
+                gameUrl: game.textarea_link || game.url || "#",
+                isHot: game.isHot || Math.random() > 0.7, // 随机设置一些游戏为热门
+                isNew: game.isNew || Math.random() > 0.8  // 随机设置一些游戏为新游戏
+            };
+        }
+        
+        // 使用示例数据（如果JSON加载失败）
+        function useExampleData() {
+            games = [
+                {
+                    id: "game1",
+                    name: "Monster Survivors",
+                    chineseName: "怪物生存者",
+                    category: "action",
+                    description: "刺激的生存游戏，对抗怪物浪潮，升级能力，为生存而战。",
+                    imageUrl: "https://via.placeholder.com/400x225?text=Monster+Survivors",
+                    gameUrl: "https://cloud.onlinegames.io/games/2025/unity/monster-survivors/index-og.html",
+                    isHot: true,
+                    isNew: false
+                },
+                {
+                    id: "game2",
+                    name: "Ninja Adventure",
+                    chineseName: "忍者冒险",
+                    category: "action",
+                    description: "扮演一名忍者，穿越危险的关卡，收集宝物，击败敌人。",
+                    imageUrl: "https://via.placeholder.com/400x225?text=Ninja+Adventure",
+                    gameUrl: "#",
+                    isHot: false,
+                    isNew: false
+                },
+                {
+                    id: "game3",
+                    name: "Dragon Fighter",
+                    chineseName: "龙之战士",
+                    category: "action",
+                    description: "在这款格斗游戏中，使用各种技能和连击击败强大的对手。",
+                    imageUrl: "https://via.placeholder.com/400x225?text=Dragon+Fighter",
+                    gameUrl: "#",
+                    isHot: false,
+                    isNew: true
+                },
+                {
+                    id: "game4",
+                    name: "Space Shooter",
+                    chineseName: "太空射手",
+                    category: "shooting",
+                    description: "驾驶你的宇宙飞船，在太空中击败外星入侵者，保卫地球。",
+                    imageUrl: "https://via.placeholder.com/400x225?text=Space+Shooter",
+                    gameUrl: "#",
+                    isHot: false,
+                    isNew: false
+                },
+                {
+                    id: "game5",
+                    name: "Zombie Apocalypse",
+                    chineseName: "僵尸末日",
+                    category: "shooting",
+                    description: "在僵尸爆发的世界中生存，收集武器和资源，击退僵尸群。",
+                    imageUrl: "https://via.placeholder.com/400x225?text=Zombie+Apocalypse",
+                    gameUrl: "#",
+                    isHot: true,
+                    isNew: false
+                },
+                {
+                    id: "game6",
+                    name: "Sniper Elite",
+                    chineseName: "狙击精英",
+                    category: "shooting",
+                    description: "成为一名狙击手，完成各种任务，展示你的精准射击技巧。",
+                    imageUrl: "https://via.placeholder.com/400x225?text=Sniper+Elite",
+                    gameUrl: "#",
+                    isHot: false,
+                    isNew: false
+                },
+                {
+                    id: "game7",
+                    name: "Brain Teaser",
+                    chineseName: "脑力挑战",
+                    category: "puzzle",
+                    description: "一系列有趣的脑筋急转弯和逻辑谜题，挑战你的思维能力。",
+                    imageUrl: "https://via.placeholder.com/400x225?text=Brain+Teaser",
+                    gameUrl: "#",
+                    isHot: false,
+                    isNew: true
+                },
+                {
+                    id: "game8",
+                    name: "Puzzle Quest",
+                    chineseName: "拼图探索",
+                    category: "puzzle",
+                    description: "结合拼图和冒险元素的游戏，解决谜题，探索神秘世界。",
+                    imageUrl: "https://via.placeholder.com/400x225?text=Puzzle+Quest",
+                    gameUrl: "#",
+                    isHot: false,
+                    isNew: false
+                },
+                {
+                    id: "game9",
+                    name: "Math Challenge",
+                    chineseName: "数学挑战",
+                    category: "puzzle",
+                    description: "通过有趣的数学游戏提升你的计算能力和数学思维。",
+                    imageUrl: "https://via.placeholder.com/400x225?text=Math+Challenge",
+                    gameUrl: "#",
+                    isHot: false,
+                    isNew: false
+                }
+            ];
+            
+            filteredGames = [...games];
+            displayFeaturedGame();
+            displayGamesByCategory();
+            setupEventListeners();
+        }
+        
+        // 显示特色游戏
+        function displayFeaturedGame() {
+            // 选择第一个热门游戏作为特色游戏，如果没有热门游戏，则选择第一个游戏
+            const featuredGame = games.find(game => game.isHot) || games[0];
+            
+            if (featuredGame) {
+                const featuredContainer = document.getElementById('featured-game-container');
+                featuredContainer.innerHTML = `
+                    <div class="w-full max-w-6xl aspect-w-16 aspect-h-9">
+                        <iframe src="${featuredGame.gameUrl}" 
+                                class="w-full h-[75vh] md:h-[80vh] lg:h-[85vh]" 
+                                frameborder="0" 
+                                allowfullscreen></iframe>
+                    </div>
+                    <div class="text-center mb-8 mt-4">
+                        <h3 class="text-2xl font-semibold mb-4">${featuredGame.chineseName || featuredGame.name}</h3>
+                        <p class="text-lg max-w-3xl mx-auto">${featuredGame.description}</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // 按分类显示游戏
+        function displayGamesByCategory() {
+            const categoriesContainer = document.getElementById('game-categories');
+            categoriesContainer.innerHTML = '';
+            
+            // 获取所有唯一的游戏分类
+            const categories = ['action', 'shooting', 'puzzle', 'strategy', 'sports'];
+            const categoryNames = {
+                'action': '动作游戏',
+                'shooting': '射击游戏',
+                'puzzle': '益智游戏',
+                'strategy': '策略游戏',
+                'sports': '体育游戏'
+            };
+            
+            // 如果当前选择了特定分类，只显示该分类
+            if (currentCategory !== 'all') {
+                const categoryGames = filteredGames.filter(game => game.category === currentCategory);
+                if (categoryGames.length > 0) {
+                    categoriesContainer.appendChild(createCategorySection(currentCategory, categoryNames[currentCategory], categoryGames));
+                }
+                return;
+            }
+            
+            // 否则显示所有分类
+            categories.forEach(category => {
+                const categoryGames = filteredGames.filter(game => game.category === category);
+                if (categoryGames.length > 0) {
+                    categoriesContainer.appendChild(createCategorySection(category, categoryNames[category], categoryGames));
+                }
+            });
+        }
+        
+        // 创建分类区域
+        function createCategorySection(categoryId, categoryName, games) {
+            const section = document.createElement('section');
+            section.id = categoryId;
+            section.className = 'mb-12';
+            
+            section.innerHTML = `
+                <div class="flex items-center mb-6">
+                    <h2 class="text-2xl font-bold">${categoryName}</h2>
+                    <div class="ml-4 flex-grow h-0.5 bg-gray-300"></div>
+                    <a href="#" class="ml-4 text-blue-600 hover:underline" data-category="${categoryId}">查看全部</a>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="${categoryId}-games">
+                    ${games.map(game => createGameCard(game)).join('')}
+                </div>
+            `;
+            
+            return section;
+        }
+        
+        // 创建游戏卡片
+        function createGameCard(game) {
+            return `
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="relative pb-[56.25%]">
+                        <img src="${game.imageUrl}" alt="${game.name}" class="absolute inset-0 w-full h-full object-cover">
+                        ${game.isHot ? '<div class="absolute top-2 right-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">热门</div>' : ''}
+                        ${game.isNew ? '<div class="absolute top-2 right-2 bg-green-600 text-white text-xs font-bold px-2 py-1 rounded">新游戏</div>' : ''}
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold mb-2">${game.chineseName || game.name}</h3>
+                        <p class="text-gray-600 mb-4 text-sm">${game.description}</p>
+                        <a href="#" class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors" data-game-id="${game.id}">开始游戏</a>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // 设置事件监听器
+        function setupEventListeners() {
+            // 分类筛选
+            document.querySelectorAll('[data-category]').forEach(element => {
+                element.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    currentCategory = this.getAttribute('data-category');
+                    filterGames();
+                });
+            });
+            
+            // 热门/新游戏筛选
+            document.querySelectorAll('[data-filter]').forEach(element => {
+                element.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const filter = this.getAttribute('data-filter');
+                    
+                    if (filter === 'hot') {
+                        filteredGames = games.filter(game => game.isHot);
+                    } else if (filter === 'new') {
+                        filteredGames = games.filter(game => game.isNew);
+                    }
+                    
+                    displayGamesByCategory();
+                });
+            });
+            
+            // 搜索功能
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                if (searchTerm.length > 0) {
+                    filteredGames = games.filter(game => 
+                        game.name.toLowerCase().includes(searchTerm) || 
+                        (game.chineseName && game.chineseName.toLowerCase().includes(searchTerm)) ||
+                        game.description.toLowerCase().includes(searchTerm)
+                    );
+                } else {
+                    filteredGames = [...games];
+                }
+                displayGamesByCategory();
+            });
+            
+            // 游戏启动
+            document.addEventListener('click', function(e) {
+                if (e.target.hasAttribute('data-game-id') || e.target.parentElement.hasAttribute('data-game-id')) {
+                    e.preventDefault();
+                    const gameId = e.target.getAttribute('data-game-id') || e.target.parentElement.getAttribute('data-game-id');
+                    openGame(gameId);
+                }
+            });
+            
+            // 关闭模态框
+            document.getElementById('closeModal').addEventListener('click', function() {
+                document.getElementById('gameModal').classList.add('hidden');
+                document.getElementById('modalGameContent').innerHTML = '';
+            });
+            
+            // 移动端菜单
+            const menuButton = document.querySelector('.md\\:hidden button');
+            const mobileMenu = document.querySelector('.md\\:flex');
+            
+            menuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('block');
+            });
+        }
+        
+        // 筛选游戏
+        function filterGames() {
+            if (currentCategory === 'all') {
+                filteredGames = [...games];
+            } else {
+                filteredGames = games.filter(game => game.category === currentCategory);
+            }
+            displayGamesByCategory();
+        }
+        
+        // 打开游戏
+        function openGame(gameId) {
+            const game = games.find(g => g.id === gameId);
+            if (game) {
+                const modal = document.getElementById('gameModal');
+                const modalTitle = document.getElementById('modalGameTitle');
+                const modalContent = document.getElementById('modalGameContent');
+                
+                modalTitle.textContent = game.chineseName || game.name;
+                
+                // 检查游戏URL是否有效
+                const gameUrl = game.gameUrl || "#";
+                if (gameUrl === "#") {
+                    modalContent.innerHTML = `<div class="p-4 text-center">
+                        <p class="text-xl text-red-500">游戏链接不可用</p>
+                        <p class="mt-2">抱歉，该游戏暂时无法访问。</p>
+                    </div>`;
+                } else {
+                    modalContent.innerHTML = `
+                        <iframe src="${gameUrl}" 
+                                class="w-full h-[80vh]" 
+                                frameborder="0" 
+                                allowfullscreen></iframe>
+                    `;
+                }
+                
+                modal.classList.remove('hidden');
+            }
+        }
+        
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', loadGames);
+    </script>
+</body>
+</html>
