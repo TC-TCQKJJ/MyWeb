@@ -1,517 +1,1298 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="在线游戏平台，提供多种类型的免费游戏，包括动作、射击、益智、策略等。立即开始游戏！">
-    <meta name="keywords" content="在线游戏, 免费游戏, Monster Survivors, 动作游戏, 射击游戏, 益智游戏">
-    <meta name="author" content="游戏天地">
-    <link rel="canonical" href="https://gamehub.example.com/">
-    <title>游戏天地 - 免费在线游戏平台</title>
+    <title>YourHomie Games | Premium Online Gaming Hub</title>
+    <meta name="description" content="Play 1000+ free online games including action, puzzle, shooting, strategy and more. Start playing now on YourHomie Games - your premium online gaming destination.">
+    <link rel="canonical" href="https://yourhomie.online/">
+    <meta name="author" content="YourHomie Games">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "YourHomie Games",
+        "url": "https://yourhomie.online/",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://yourhomie.online/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#F5F5F7',
+                        secondary: '#1D1D1F',
+                        accent: '#2997FF',
+                        text: 'rgba(29, 29, 31, 0.8)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js');
+            });
+        }
+    </script>
 </head>
-<body class="bg-gray-100 text-gray-900">
-    <!-- 导航栏 -->
-    <nav class="bg-gray-900 text-white py-4">
-        <div class="max-w-6xl mx-auto px-4 flex flex-wrap items-center justify-between">
-            <div class="flex items-center">
-                <a href="#" class="text-2xl font-bold">游戏天地</a>
-            </div>
-            
-            <!-- 导航菜单 -->
-            <div class="hidden md:flex space-x-6">
-                <a href="#" class="hover:text-blue-400">首页</a>
-                <div class="relative group">
-                    <a href="#" class="hover:text-blue-400">游戏分类 <i class="fas fa-chevron-down text-xs ml-1"></i></a>
-                    <div class="absolute left-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg py-2 z-10 hidden group-hover:block">
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-700" data-category="all">全部游戏</a>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-700" data-category="action">动作游戏</a>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-700" data-category="shooting">射击游戏</a>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-700" data-category="puzzle">益智游戏</a>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-700" data-category="strategy">策略游戏</a>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-700" data-category="sports">体育游戏</a>
+
+<body class="bg-primary text-secondary">
+    <!-- Sticky Navigation -->
+    <nav class="sticky top-0 bg-primary/95 backdrop-blur z-50 border-b border-secondary/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <a href="/" class="flex items-center space-x-2">
+                    <span class="text-2xl font-bold text-secondary">YourHomie</span>
+                    <span class="text-accent">.online</span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex space-x-8" id="categoryMenu">
+                    <a href="/" class="text-secondary hover:text-accent transition-colors">Home</a>
+                    <div class="relative group">
+                        <button class="text-secondary hover:text-accent transition-colors">
+                            Categories
+                            <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 hidden group-hover:block">
+                            <!-- Categories will be dynamically inserted here -->
+                        </div>
                     </div>
+                    <a href="/popular" class="text-secondary hover:text-accent transition-colors">Popular</a>
+                    <a href="/new" class="text-secondary hover:text-accent transition-colors">New Games</a>
                 </div>
-                <a href="#" class="hover:text-blue-400" data-filter="hot">热门游戏</a>
-                <a href="#" class="hover:text-blue-400" data-filter="new">新增游戏</a>
-                <a href="#" class="hover:text-blue-400">关于我们</a>
-            </div>
-            
-            <!-- 移动端菜单按钮 -->
-            <div class="md:hidden">
-                <button class="text-white focus:outline-none">
+
+                <!-- Search Form -->
+                <form role="search" aria-label="Site search" class="hidden md:block">
+                    <div class="relative">
+                        <input 
+                            type="search" 
+                            id="gameSearch" 
+                            class="w-64 px-4 py-2 rounded-full border border-secondary/20 focus:outline-none focus:ring-2 focus:ring-accent"
+                            placeholder="Search 1000+ games..."
+                        >
+                        <button type="submit" class="absolute right-3 top-2.5 text-secondary/50">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-secondary" id="mobileMenuBtn">
                     <i class="fas fa-bars text-xl"></i>
                 </button>
             </div>
-            
-            <!-- 搜索框 -->
-            <div class="w-full md:w-auto mt-4 md:mt-0">
-                <div class="relative">
-                    <input type="text" id="searchInput" placeholder="搜索游戏..." class="bg-gray-800 text-white rounded-full py-2 px-4 pl-10 w-full md:w-64 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden" id="mobileMenu">
+            <div class="px-4 py-2 space-y-2">
+                <a href="/" class="block py-2 text-secondary hover:text-accent">Home</a>
+                <button class="w-full text-left py-2 text-secondary hover:text-accent" id="mobileCategoriesBtn">
+                    Categories <i class="fas fa-chevron-down ml-1"></i>
+                </button>
+                <div class="hidden pl-4" id="mobileCategoriesMenu">
+                    <!-- Mobile categories will be dynamically inserted here -->
                 </div>
+                <a href="/popular" class="block py-2 text-secondary hover:text-accent">Popular</a>
+                <a href="/new" class="block py-2 text-secondary hover:text-accent">New Games</a>
             </div>
         </div>
     </nav>
-    
-    <header class="text-center py-10 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-        <h1 class="text-4xl font-bold mb-2">游戏天地</h1>
-        <p class="text-lg">海量免费游戏，尽在指尖</p>
+
+    <!-- Hero Section -->
+    <header class="bg-secondary text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Premium Online Gaming Hub</h1>
+            <p class="text-lg md:text-xl text-white/80 max-w-3xl mx-auto">
+                Discover and play over 1000 free online games. From action-packed adventures to brain-teasing puzzles, find your next favorite game today.
+            </p>
+        </div>
     </header>
-    
-    <main class="max-w-6xl mx-auto p-6">
-        <!-- 特色游戏 -->
-        <section id="featured-game" class="mb-12">
-            <h2 class="text-3xl font-bold mb-6 text-center">特色游戏</h2>
-            <div id="featured-game-container" class="w-full flex justify-center mb-8">
-                <!-- 特色游戏将通过JavaScript动态加载 -->
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Featured Games Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8">Featured Games</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="featuredGames">
+                <!-- Featured games will be dynamically inserted here -->
+                <div class="animate-pulse">
+                    <div class="bg-secondary/10 h-48 rounded-lg mb-4"></div>
+                    <div class="h-6 bg-secondary/10 rounded w-3/4 mb-2"></div>
+                    <div class="h-4 bg-secondary/10 rounded w-1/2"></div>
+                </div>
             </div>
         </section>
-        
-        <!-- 游戏分类区域 -->
-        <div id="game-categories">
-            <!-- 游戏分类将通过JavaScript动态加载 -->
-        </div>
+
+        <!-- Game Categories -->
+        <section class="space-y-16" id="gameCategories">
+            <!-- Game categories will be dynamically inserted here -->
+        </section>
     </main>
-    
-    <footer class="bg-gray-900 text-white py-8">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-xl font-semibold mb-4">游戏天地</h3>
-                    <p class="text-gray-400">提供各种类型的免费在线游戏，让您随时随地享受游戏乐趣。</p>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">游戏分类</h3>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white" data-category="action">动作游戏</a></li>
-                        <li><a href="#" class="hover:text-white" data-category="shooting">射击游戏</a></li>
-                        <li><a href="#" class="hover:text-white" data-category="puzzle">益智游戏</a></li>
-                        <li><a href="#" class="hover:text-white" data-category="strategy">策略游戏</a></li>
-                        <li><a href="#" class="hover:text-white" data-category="sports">体育游戏</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">关于我们</h3>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white">关于我们</a></li>
-                        <li><a href="#" class="hover:text-white">联系我们</a></li>
-                        <li><a href="#" class="hover:text-white">隐私政策</a></li>
-                        <li><a href="#" class="hover:text-white">使用条款</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">关注我们</h3>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-weixin"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-weibo"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-qq"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-bilibili"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="border-t border-gray-800 mt-8 pt-6 text-center text-gray-400">
-                <p>&copy; 2025 游戏天地. 保留所有权利.</p>
-            </div>
-        </div>
-    </footer>
-    
-    <!-- 游戏详情模态框 -->
-    <div id="gameModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white rounded-lg max-w-4xl w-full max-h-screen overflow-auto">
+
+    <!-- Game Modal -->
+    <div id="gameModal" class="fixed inset-0 bg-black/75 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-lg max-w-5xl w-full mx-4 max-h-[90vh] overflow-auto">
             <div class="p-6">
                 <div class="flex justify-between items-center mb-4">
-                    <h2 id="modalGameTitle" class="text-2xl font-bold"></h2>
-                    <button id="closeModal" class="text-gray-500 hover:text-gray-700">
+                    <h3 class="text-2xl font-bold" id="modalTitle"></h3>
+                    <button class="text-secondary/50 hover:text-secondary" id="closeModal">
                         <i class="fas fa-times text-xl"></i>
                     </button>
                 </div>
-                <div id="modalGameContent" class="w-full">
-                    <!-- 游戏iframe将在这里加载 -->
-                </div>
+                <div id="modalContent"></div>
             </div>
         </div>
     </div>
-    
-    <!-- JavaScript -->
+
+    <footer class="bg-secondary text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">YourHomie Games</h3>
+                    <p class="text-white/70">Your premium destination for free online gaming entertainment.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Categories</h3>
+                    <ul class="space-y-2 text-white/70" id="footerCategories">
+                        <!-- Categories will be dynamically inserted here -->
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-white/70">
+                        <li><a href="/about" class="hover:text-white">About Us</a></li>
+                        <li><a href="/contact" class="hover:text-white">Contact</a></li>
+                        <li><a href="/privacy" class="hover:text-white">Privacy Policy</a></li>
+                        <li><a href="/terms" class="hover:text-white">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Follow Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-white/70 hover:text-white text-2xl">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-white/70 hover:text-white text-2xl">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="text-white/70 hover:text-white text-2xl">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-white/70 hover:text-white text-2xl">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-white/10 mt-8 pt-8 text-center text-white/70">
+                <p>&copy; 2023 YourHomie Games. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Main JavaScript -->
     <script>
-        // 游戏数据
+        // Game data and state
         let games = [];
-        let filteredGames = [];
-        let currentCategory = 'all';
+        let categories = [];
         
-        // 加载游戏数据
+        // Load and process games data
         async function loadGames() {
             try {
                 console.log("开始加载游戏数据...");
-                // 替换为您的JSON文件路径
-                const response = await fetch('games_info.json');
+                
+                // 使用绝对路径
+                const response = await fetch('/games_info.json');
+                
+                console.log("获取响应状态:", response.status);
                 if (!response.ok) {
-                    throw new Error(`HTTP错误! 状态: ${response.status}`);
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 
-                const rawData = await response.json();
-                console.log("成功加载JSON数据:", rawData);
+                const text = await response.text();
+                console.log("原始响应内容:", text.substring(0, 200) + "...");
                 
-                // 转换数据格式以匹配网站需要的结构
-                if (Array.isArray(rawData)) {
-                    console.log("处理游戏数组...");
-                    games = rawData.map(convertGameFormat);
-                } else if (typeof rawData === 'object' && rawData !== null) {
-                    console.log("处理单个游戏对象...");
-                    games = [convertGameFormat(rawData)];
-                } else {
-                    console.error("无效的JSON数据格式:", rawData);
-                    throw new Error("无效的JSON数据格式");
+                // 尝试解析JSON
+                try {
+                    const data = JSON.parse(text);
+                    console.log("成功解析JSON数据");
+                    
+                    // 确保games是数组
+                    games = Array.isArray(data) ? data : [data];
+                    console.log(`加载了 ${games.length} 个游戏`);
+                    
+                    // 处理游戏数据
+                    processGameData();
+                    
+                    // 初始化UI
+                    enhancedCategorySystem();
+                    createEnhancedCategoryUI();
+                    loadFeaturedGames();
+                    loadGameCategories();
+                    setupEventListeners();
+                } catch (jsonError) {
+                    console.error("JSON解析错误:", jsonError);
+                    throw new Error("JSON解析失败: " + jsonError.message);
                 }
-                
-                console.log("转换后的游戏数据:", games);
-                filteredGames = [...games];
-                
-                // 初始化页面
-                displayFeaturedGame();
-                displayGamesByCategory();
-                setupEventListeners();
             } catch (error) {
-                console.error('加载游戏数据失败:', error);
-                // 如果无法加载JSON，使用示例数据
-                useExampleData();
+                console.error('加载游戏数据时出错:', error);
+                
+                // 显示更友好的错误信息，并提供一个示例JSON
+                document.getElementById('featuredGames').innerHTML = `
+                    <div class="col-span-full text-center">
+                        <p class="text-red-500 text-xl mb-2">Error loading games</p>
+                        <p class="text-gray-600">Specific error: ${error.message}</p>
+                        <details class="mt-4 text-left inline-block">
+                            <summary class="cursor-pointer text-accent">解决方法和示例JSON</summary>
+                            <div class="bg-gray-100 p-4 rounded mt-2">
+                                <p class="mb-2">1. 确保games_info.json位于网站根目录</p>
+                                <p class="mb-2">2. 确保JSON格式正确</p>
+                                <p class="mb-4">3. 使用本地开发服务器运行网站</p>
+                                
+                                <p class="font-semibold">示例JSON格式:</p>
+                                <pre class="bg-gray-800 text-white p-4 rounded text-sm overflow-auto">[
+  {
+    "id": "game1",
+    "name": "Game Name",
+    "description": "Game description text",
+    "image_url": "https://example.com/image.jpg",
+    "url": "https://example.com/game",
+    "textarea_link": "https://example.com/iframe-url",
+    "tags": ["action", "adventure"]
+  }
+]</pre>
+                            </div>
+                        </details>
+                    </div>
+                    <div class="col-span-full mt-8">
+                        <button id="loadDemoData" class="bg-accent text-white px-6 py-3 rounded-full mx-auto block">
+                            加载演示数据
+                        </button>
+                    </div>
+                `;
+                
+                // 添加加载演示数据按钮功能
+                document.getElementById('loadDemoData')?.addEventListener('click', function() {
+                    useExampleData();
+                });
             }
         }
         
-        // 转换游戏数据格式
-        function convertGameFormat(game) {
-            // 随机分配一个类别，因为您的JSON中没有类别信息
-            const categories = ['action', 'shooting', 'puzzle', 'strategy', 'sports'];
-            const randomCategory = categories[Math.floor(Math.random() * categories.length)];
-            
-            return {
+        // 处理游戏数据的辅助函数
+        function processGameData() {
+            // 确保每个游戏都有必要的属性
+            games = games.map(game => ({
                 id: game.id || `game-${Math.random().toString(36).substr(2, 9)}`,
-                name: game.name || "未命名游戏",
-                chineseName: game.chinese_name || game.name || "未命名游戏", // 如果有中文名则使用，否则使用英文名
-                category: game.category || randomCategory,
-                description: game.description || "暂无描述",
-                imageUrl: game.image_url || game.local_image_path || "https://via.placeholder.com/400x225?text=No+Image",
-                gameUrl: game.textarea_link || game.url || "#",
-                isHot: game.isHot || Math.random() > 0.7, // 随机设置一些游戏为热门
-                isNew: game.isNew || Math.random() > 0.8  // 随机设置一些游戏为新游戏
-            };
+                name: game.name || "Unnamed Game",
+                description: game.description || "No description available",
+                image_url: game.image_url || game.local_image_path || "https://via.placeholder.com/400x225?text=Game",
+                url: game.url || "#",
+                textarea_link: game.textarea_link || game.url || "#",
+                tags: game.tags || ['action'],
+                isHot: game.isHot || game.hot || Math.random() > 0.7,
+                isNew: game.isNew || game.new || Math.random() > 0.8
+            }));
         }
-        
-        // 使用示例数据（如果JSON加载失败）
+
+        // 使用演示数据
         function useExampleData() {
             games = [
                 {
                     id: "game1",
-                    name: "Monster Survivors",
-                    chineseName: "怪物生存者",
-                    category: "action",
-                    description: "刺激的生存游戏，对抗怪物浪潮，升级能力，为生存而战。",
-                    imageUrl: "https://via.placeholder.com/400x225?text=Monster+Survivors",
-                    gameUrl: "https://cloud.onlinegames.io/games/2025/unity/monster-survivors/index-og.html",
+                    name: "Space Adventure",
+                    description: "Embark on an exciting space adventure. Navigate through asteroid fields, battle alien ships, and explore the universe.",
+                    image_url: "https://via.placeholder.com/400x225?text=Space+Adventure",
+                    url: "https://html5.gamedistribution.com/rvvASMiM/5b0abdbbe4f849109a2c80b3bb46eda2/index.html",
+                    textarea_link: "https://html5.gamedistribution.com/rvvASMiM/5b0abdbbe4f849109a2c80b3bb46eda2/index.html",
+                    tags: ["action", "adventure", "space"],
                     isHot: true,
                     isNew: false
                 },
                 {
                     id: "game2",
-                    name: "Ninja Adventure",
-                    chineseName: "忍者冒险",
-                    category: "action",
-                    description: "扮演一名忍者，穿越危险的关卡，收集宝物，击败敌人。",
-                    imageUrl: "https://via.placeholder.com/400x225?text=Ninja+Adventure",
-                    gameUrl: "#",
+                    name: "Puzzle Master",
+                    description: "Challenge your brain with increasingly difficult puzzles. Solve patterns, match colors, and unlock new levels.",
+                    image_url: "https://via.placeholder.com/400x225?text=Puzzle+Master",
+                    url: "https://html5.gamedistribution.com/rvvASMiM/36a8a540ae3d4336b8e97c04cc70db76/index.html",
+                    textarea_link: "https://html5.gamedistribution.com/rvvASMiM/36a8a540ae3d4336b8e97c04cc70db76/index.html",
+                    tags: ["puzzle", "logic", "brain"],
                     isHot: false,
-                    isNew: false
+                    isNew: true
                 },
                 {
                     id: "game3",
-                    name: "Dragon Fighter",
-                    chineseName: "龙之战士",
-                    category: "action",
-                    description: "在这款格斗游戏中，使用各种技能和连击击败强大的对手。",
-                    imageUrl: "https://via.placeholder.com/400x225?text=Dragon+Fighter",
-                    gameUrl: "#",
-                    isHot: false,
-                    isNew: true
-                },
-                {
-                    id: "game4",
-                    name: "Space Shooter",
-                    chineseName: "太空射手",
-                    category: "shooting",
-                    description: "驾驶你的宇宙飞船，在太空中击败外星入侵者，保卫地球。",
-                    imageUrl: "https://via.placeholder.com/400x225?text=Space+Shooter",
-                    gameUrl: "#",
-                    isHot: false,
-                    isNew: false
-                },
-                {
-                    id: "game5",
-                    name: "Zombie Apocalypse",
-                    chineseName: "僵尸末日",
-                    category: "shooting",
-                    description: "在僵尸爆发的世界中生存，收集武器和资源，击退僵尸群。",
-                    imageUrl: "https://via.placeholder.com/400x225?text=Zombie+Apocalypse",
-                    gameUrl: "#",
+                    name: "Zombie Shooter",
+                    description: "Survive the zombie apocalypse. Collect weapons, gather resources, and fight off hordes of the undead.",
+                    image_url: "https://via.placeholder.com/400x225?text=Zombie+Shooter",
+                    url: "https://html5.gamedistribution.com/rvvASMiM/f804d079d31d48c0b43e4bd9cdcf40f7/index.html",
+                    textarea_link: "https://html5.gamedistribution.com/rvvASMiM/f804d079d31d48c0b43e4bd9cdcf40f7/index.html",
+                    tags: ["shooting", "zombie", "action"],
                     isHot: true,
-                    isNew: false
-                },
-                {
-                    id: "game6",
-                    name: "Sniper Elite",
-                    chineseName: "狙击精英",
-                    category: "shooting",
-                    description: "成为一名狙击手，完成各种任务，展示你的精准射击技巧。",
-                    imageUrl: "https://via.placeholder.com/400x225?text=Sniper+Elite",
-                    gameUrl: "#",
-                    isHot: false,
-                    isNew: false
-                },
-                {
-                    id: "game7",
-                    name: "Brain Teaser",
-                    chineseName: "脑力挑战",
-                    category: "puzzle",
-                    description: "一系列有趣的脑筋急转弯和逻辑谜题，挑战你的思维能力。",
-                    imageUrl: "https://via.placeholder.com/400x225?text=Brain+Teaser",
-                    gameUrl: "#",
-                    isHot: false,
-                    isNew: true
-                },
-                {
-                    id: "game8",
-                    name: "Puzzle Quest",
-                    chineseName: "拼图探索",
-                    category: "puzzle",
-                    description: "结合拼图和冒险元素的游戏，解决谜题，探索神秘世界。",
-                    imageUrl: "https://via.placeholder.com/400x225?text=Puzzle+Quest",
-                    gameUrl: "#",
-                    isHot: false,
-                    isNew: false
-                },
-                {
-                    id: "game9",
-                    name: "Math Challenge",
-                    chineseName: "数学挑战",
-                    category: "puzzle",
-                    description: "通过有趣的数学游戏提升你的计算能力和数学思维。",
-                    imageUrl: "https://via.placeholder.com/400x225?text=Math+Challenge",
-                    gameUrl: "#",
-                    isHot: false,
                     isNew: false
                 }
             ];
             
-            filteredGames = [...games];
-            displayFeaturedGame();
-            displayGamesByCategory();
+            // 处理游戏数据
+            processGameData();
+            
+            // 初始化UI
+            enhancedCategorySystem();
+            createEnhancedCategoryUI();
+            loadFeaturedGames();
+            loadGameCategories();
             setupEventListeners();
         }
         
-        // 显示特色游戏
-        function displayFeaturedGame() {
-            // 选择第一个热门游戏作为特色游戏，如果没有热门游戏，则选择第一个游戏
-            const featuredGame = games.find(game => game.isHot) || games[0];
+        // Initialize UI components
+        function initializeUI() {
+            // Populate category menus
+            const categoryMenus = document.querySelectorAll('#categoryMenu .group > div');
+            const mobileCategoryMenu = document.getElementById('mobileCategoriesMenu');
+            const footerCategories = document.getElementById('footerCategories');
             
-            if (featuredGame) {
-                const featuredContainer = document.getElementById('featured-game-container');
-                featuredContainer.innerHTML = `
-                    <div class="w-full max-w-6xl aspect-w-16 aspect-h-9">
-                        <iframe src="${featuredGame.gameUrl}" 
-                                class="w-full h-[75vh] md:h-[80vh] lg:h-[85vh]" 
-                                frameborder="0" 
-                                allowfullscreen></iframe>
-                    </div>
-                    <div class="text-center mb-8 mt-4">
-                        <h3 class="text-2xl font-semibold mb-4">${featuredGame.chineseName || featuredGame.name}</h3>
-                        <p class="text-lg max-w-3xl mx-auto">${featuredGame.description}</p>
-                    </div>
-                `;
-            }
+            const categoryHTML = categories.map(category => 
+                `<a href="#/category/${category.toLowerCase()}" 
+                    class="block px-4 py-2 text-secondary hover:bg-secondary/5">${category}</a>`
+            ).join('');
+            
+            categoryMenus.forEach(menu => menu.innerHTML = categoryHTML);
+            mobileCategoryMenu.innerHTML = categories.map(category =>
+                `<a href="#/category/${category.toLowerCase()}" 
+                    class="block py-2 pl-4 text-secondary hover:text-accent">${category}</a>`
+            ).join('');
+            
+            footerCategories.innerHTML = categories.map(category =>
+                `<li><a href="#/category/${category.toLowerCase()}" 
+                    class="hover:text-white">${category} Games</a></li>`
+            ).join('');
+            
+            // Setup event listeners
+            setupEventListeners();
         }
         
-        // 按分类显示游戏
-        function displayGamesByCategory() {
-            const categoriesContainer = document.getElementById('game-categories');
-            categoriesContainer.innerHTML = '';
-            
-            // 获取所有唯一的游戏分类
-            const categories = ['action', 'shooting', 'puzzle', 'strategy', 'sports'];
-            const categoryNames = {
-                'action': '动作游戏',
-                'shooting': '射击游戏',
-                'puzzle': '益智游戏',
-                'strategy': '策略游戏',
-                'sports': '体育游戏'
-            };
-            
-            // 如果当前选择了特定分类，只显示该分类
-            if (currentCategory !== 'all') {
-                const categoryGames = filteredGames.filter(game => game.category === currentCategory);
-                if (categoryGames.length > 0) {
-                    categoriesContainer.appendChild(createCategorySection(currentCategory, categoryNames[currentCategory], categoryGames));
-                }
+        // Load featured games
+        function loadFeaturedGames() {
+            const featuredContainer = document.getElementById('featuredGames');
+            if (!featuredContainer) {
+                console.error('找不到featuredGames容器');
                 return;
             }
             
-            // 否则显示所有分类
-            categories.forEach(category => {
-                const categoryGames = filteredGames.filter(game => game.category === category);
-                if (categoryGames.length > 0) {
-                    categoriesContainer.appendChild(createCategorySection(category, categoryNames[category], categoryGames));
-                }
-            });
+            // 选择最多12个热门游戏
+            const hotGames = games.filter(game => game.isHot || Math.random() > 0.7).slice(0, 12);
+            const featuredGames = hotGames.length >= 6 ? hotGames : games.slice(0, 12);
+            
+            featuredContainer.innerHTML = featuredGames.map(game => createGameCard(game)).join('');
         }
         
-        // 创建分类区域
-        function createCategorySection(categoryId, categoryName, games) {
-            const section = document.createElement('section');
-            section.id = categoryId;
-            section.className = 'mb-12';
-            
-            section.innerHTML = `
-                <div class="flex items-center mb-6">
-                    <h2 class="text-2xl font-bold">${categoryName}</h2>
-                    <div class="ml-4 flex-grow h-0.5 bg-gray-300"></div>
-                    <a href="#" class="ml-4 text-blue-600 hover:underline" data-category="${categoryId}">查看全部</a>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="${categoryId}-games">
-                    ${games.map(game => createGameCard(game)).join('')}
-                </div>
-            `;
-            
-            return section;
-        }
-        
-        // 创建游戏卡片
+        // Create game card HTML
         function createGameCard(game) {
             return `
-                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
-                    <div class="relative pb-[56.25%]">
-                        <img src="${game.imageUrl}" alt="${game.name}" class="absolute inset-0 w-full h-full object-cover">
-                        ${game.isHot ? '<div class="absolute top-2 right-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">热门</div>' : ''}
-                        ${game.isNew ? '<div class="absolute top-2 right-2 bg-green-600 text-white text-xs font-bold px-2 py-1 rounded">新游戏</div>' : ''}
+                <article class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                    <div>
+                        <div class="relative pb-[56.25%]">
+                            <img 
+                                src="${game.image_url || 'https://via.placeholder.com/400x225?text=' + encodeURIComponent(game.name)}" 
+                                alt="${game.name} gameplay screenshot"
+                                class="absolute inset-0 w-full h-full object-cover"
+                                loading="lazy"
+                                onerror="this.src='${game.local_image_path || 'https://via.placeholder.com/400x225?text=' + encodeURIComponent(game.name)}';"
+                            >
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">${game.name}</h3>
+                            <p class="text-text mb-4 line-clamp-2">${game.description}</p>
+                            <div class="flex justify-between items-center">
+                                <button 
+                                    class="bg-accent text-white px-4 py-2 rounded-full hover:bg-accent/90 transition-colors"
+                                    onclick="playGameDirectly('${game.id}', event)"
+                                >
+                                    Play Now
+                                </button>
+                                <button 
+                                    class="text-accent hover:underline"
+                                    onclick="showGameDetails('${game.id}')"
+                                >
+                                    Details
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="p-4">
-                        <h3 class="text-xl font-semibold mb-2">${game.chineseName || game.name}</h3>
-                        <p class="text-gray-600 mb-4 text-sm">${game.description}</p>
-                        <a href="#" class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors" data-game-id="${game.id}">开始游戏</a>
-                    </div>
-                </div>
+                </article>
             `;
         }
         
-        // 设置事件监听器
-        function setupEventListeners() {
-            // 分类筛选
-            document.querySelectorAll('[data-category]').forEach(element => {
-                element.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    currentCategory = this.getAttribute('data-category');
-                    filterGames();
-                });
-            });
-            
-            // 热门/新游戏筛选
-            document.querySelectorAll('[data-filter]').forEach(element => {
-                element.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const filter = this.getAttribute('data-filter');
-                    
-                    if (filter === 'hot') {
-                        filteredGames = games.filter(game => game.isHot);
-                    } else if (filter === 'new') {
-                        filteredGames = games.filter(game => game.isNew);
-                    }
-                    
-                    displayGamesByCategory();
-                });
-            });
-            
-            // 搜索功能
-            const searchInput = document.getElementById('searchInput');
-            searchInput.addEventListener('input', function() {
-                const searchTerm = this.value.toLowerCase();
-                if (searchTerm.length > 0) {
-                    filteredGames = games.filter(game => 
-                        game.name.toLowerCase().includes(searchTerm) || 
-                        (game.chineseName && game.chineseName.toLowerCase().includes(searchTerm)) ||
-                        game.description.toLowerCase().includes(searchTerm)
-                    );
-                } else {
-                    filteredGames = [...games];
-                }
-                displayGamesByCategory();
-            });
-            
-            // 游戏启动
-            document.addEventListener('click', function(e) {
-                if (e.target.hasAttribute('data-game-id') || e.target.parentElement.hasAttribute('data-game-id')) {
-                    e.preventDefault();
-                    const gameId = e.target.getAttribute('data-game-id') || e.target.parentElement.getAttribute('data-game-id');
-                    openGame(gameId);
-                }
-            });
-            
-            // 关闭模态框
-            document.getElementById('closeModal').addEventListener('click', function() {
-                document.getElementById('gameModal').classList.add('hidden');
-                document.getElementById('modalGameContent').innerHTML = '';
-            });
-            
-            // 移动端菜单
-            const menuButton = document.querySelector('.md\\:hidden button');
-            const mobileMenu = document.querySelector('.md\\:flex');
-            
-            menuButton.addEventListener('click', function() {
-                mobileMenu.classList.toggle('hidden');
-                mobileMenu.classList.toggle('block');
-            });
-        }
-        
-        // 筛选游戏
-        function filterGames() {
-            if (currentCategory === 'all') {
-                filteredGames = [...games];
-            } else {
-                filteredGames = games.filter(game => game.category === currentCategory);
+        // Load game categories
+        function loadGameCategories() {
+            const categoriesContainer = document.getElementById('gameCategories');
+            if (!categoriesContainer) {
+                console.error('找不到gameCategories容器');
+                return;
             }
-            displayGamesByCategory();
+            
+            categoriesContainer.innerHTML = '';
+            
+            // 为每个分类加载第一页游戏
+            if (categories && categories.length > 0) {
+                categories.forEach(category => {
+                    loadCategoryWithPagination(category, 1);
+                });
+            } else {
+                console.warn('没有可用的游戏分类');
+            }
+            
+            // 添加 "All Games" 分类
+            const allGamesSection = document.createElement('section');
+            allGamesSection.innerHTML = `
+                <div class="flex items-center justify-between mb-6 mt-16">
+                    <h2 class="text-2xl font-bold">All Games</h2>
+                    <a href="/all-games" class="text-accent hover:underline">Browse All</a>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    ${games.slice(0, 12).map(game => createGameCard(game)).join('')}
+                </div>
+                <div class="text-center mt-8">
+                    <a href="/all-games" class="inline-block bg-accent text-white px-6 py-3 rounded-full hover:bg-accent/90 transition-colors">
+                        View All ${games.length} Games
+                    </a>
+                </div>
+            `;
+            categoriesContainer.appendChild(allGamesSection);
         }
         
-        // 打开游戏
+        // Open game in modal
         function openGame(gameId) {
             const game = games.find(g => g.id === gameId);
-            if (game) {
-                const modal = document.getElementById('gameModal');
-                const modalTitle = document.getElementById('modalGameTitle');
-                const modalContent = document.getElementById('modalGameContent');
-                
-                modalTitle.textContent = game.chineseName || game.name;
-                
-                // 检查游戏URL是否有效
-                const gameUrl = game.gameUrl || "#";
-                if (gameUrl === "#") {
-                    modalContent.innerHTML = `<div class="p-4 text-center">
-                        <p class="text-xl text-red-500">游戏链接不可用</p>
-                        <p class="mt-2">抱歉，该游戏暂时无法访问。</p>
-                    </div>`;
-                } else {
-                    modalContent.innerHTML = `
-                        <iframe src="${gameUrl}" 
-                                class="w-full h-[80vh]" 
-                                frameborder="0" 
-                                allowfullscreen></iframe>
-                    `;
+            if (!game) return;
+            
+            const modal = document.getElementById('gameModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+            
+            modalTitle.textContent = game.name;
+            
+            // Use textarea_link if available, otherwise use url
+            const gameUrl = game.textarea_link || game.url;
+            
+            if (!gameUrl) {
+                modalContent.innerHTML = `
+                    <div class="p-4 text-center">
+                        <p class="text-xl text-red-500">Game unavailable</p>
+                        <p class="mt-2">Sorry, this game is currently unavailable.</p>
+                    </div>
+                `;
+            } else {
+                modalContent.innerHTML = `
+                    <div class="mb-4">
+                        <p class="text-text mb-4">${game.description}</p>
+                    </div>
+                    <div class="relative w-full" style="padding-top: 56.25%;">
+                        <iframe 
+                            src="${gameUrl}" 
+                            class="absolute top-0 left-0 w-full h-full"
+                            frameborder="0"
+                            allowfullscreen
+                            allow="autoplay; fullscreen"
+                        ></iframe>
+                    </div>
+                `;
+            }
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            // Add ESC key to close modal
+            const handleEsc = (e) => {
+                if (e.key === 'Escape') {
+                    closeModal();
                 }
-                
-                modal.classList.remove('hidden');
+            };
+            document.addEventListener('keydown', handleEsc);
+            
+            // Click outside to close
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            function closeModal() {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.removeEventListener('keydown', handleEsc);
+                modalContent.innerHTML = '';
             }
         }
         
-        // 页面加载完成后初始化
-        document.addEventListener('DOMContentLoaded', loadGames);
+        // Setup event listeners
+        function setupEventListeners() {
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileCategoriesBtn = document.getElementById('mobileCategoriesBtn');
+            const mobileCategoriesMenu = document.getElementById('mobileCategoriesMenu');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            mobileCategoriesBtn.addEventListener('click', () => {
+                mobileCategoriesMenu.classList.toggle('hidden');
+            });
+            
+            // Modal close
+            const closeModal = document.getElementById('closeModal');
+            const gameModal = document.getElementById('gameModal');
+            
+            closeModal.addEventListener('click', () => {
+                gameModal.classList.add('hidden');
+                gameModal.classList.remove('flex');
+            });
+            
+            // Search functionality
+            const searchInput = document.getElementById('gameSearch');
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredGames = games.filter(game => 
+                    game.name.toLowerCase().includes(searchTerm) ||
+                    game.description.toLowerCase().includes(searchTerm)
+                );
+                
+                // Update UI with filtered games
+                document.getElementById('featuredGames').innerHTML = 
+                    filteredGames.map(game => createGameCard(game)).join('');
+            });
+            
+            // 修复懒加载图片实现
+            const lazyImages = document.querySelectorAll('img.lazy-load');
+            if (lazyImages.length > 0) {
+                if ('IntersectionObserver' in window) {
+                    const imageObserver = new IntersectionObserver((entries, observer) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                const img = entry.target;
+                                // 确保data-src存在，否则使用src
+                                if (img.dataset.src) {
+                                    img.src = img.dataset.src;
+                                }
+                                img.classList.remove('lazy-load');
+                                observer.unobserve(img);
+                            }
+                        });
+                    });
+                    
+                    lazyImages.forEach(img => {
+                        // 确保图片有data-src属性
+                        if (!img.dataset.src && img.src) {
+                            img.dataset.src = img.src;
+                        }
+                        imageObserver.observe(img);
+                    });
+                } else {
+                    // 降级处理：对于不支持IntersectionObserver的浏览器
+                    lazyImages.forEach(img => {
+                        if (!img.dataset.src && img.src) {
+                            img.dataset.src = img.src;
+                        }
+                    });
+                    
+                    function lazyLoad() {
+                        lazyImages.forEach(img => {
+                            if (img.getBoundingClientRect().top <= window.innerHeight && 
+                                img.getBoundingClientRect().bottom >= 0 && 
+                                getComputedStyle(img).display !== "none") {
+                                
+                                if (img.dataset.src) {
+                                    img.src = img.dataset.src;
+                                }
+                                img.classList.remove('lazy-load');
+                            }
+                        });
+                    }
+                    
+                    // 添加事件监听
+                    window.addEventListener('scroll', lazyLoad);
+                    window.addEventListener('resize', lazyLoad);
+                    window.addEventListener('orientationChange', lazyLoad);
+                    // 初始加载
+                    lazyLoad();
+                }
+            }
+        }
+        
+        // 新增分页系统函数
+        function loadCategoryWithPagination(category, page = 1, gamesPerPage = 12) {
+            const categoriesContainer = document.getElementById('gameCategories');
+            
+            // 过滤出该分类的所有游戏
+            const categoryGames = games.filter(game => {
+                const tags = game.tags || [];
+                return (tags.includes(category.toLowerCase()));
+            });
+            
+            // 计算总页数
+            const totalPages = Math.ceil(categoryGames.length / gamesPerPage);
+            
+            // 获取当前页的游戏
+            const startIndex = (page - 1) * gamesPerPage;
+            const paginatedGames = categoryGames.slice(startIndex, startIndex + gamesPerPage);
+            
+            // 创建分类区域
+            const categoryId = `category-${category.toLowerCase()}`;
+            let categorySection = document.getElementById(categoryId);
+            
+            if (!categorySection) {
+                categorySection = document.createElement('section');
+                categorySection.id = categoryId;
+                categoriesContainer.appendChild(categorySection);
+            }
+            
+            // 构建分页控件
+            let paginationControls = '';
+            if (totalPages > 1) {
+                paginationControls = '<div class="flex justify-center mt-8 space-x-2">';
+                for (let i = 1; i <= totalPages; i++) {
+                    const isActive = i === page;
+                    paginationControls += `
+                        <button 
+                            class="px-3 py-1 rounded ${isActive ? 'bg-accent text-white' : 'bg-gray-200 text-secondary hover:bg-gray-300'}"
+                            onclick="loadCategoryWithPagination('${category}', ${i})"
+                        >${i}</button>
+                    `;
+                }
+                paginationControls += '</div>';
+            }
+            
+            // 更新分类区域内容
+            categorySection.innerHTML = `
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold">${category} Games</h2>
+                    <a href="#/category/${category.toLowerCase()}" class="text-accent hover:underline">View All</a>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    ${paginatedGames.map(game => createGameCard(game)).join('')}
+                </div>
+                ${paginationControls}
+            `;
+        }
+        
+        // 新增在首页直接播放游戏的函数
+        function playGameDirectly(gameId, event) {
+            event.preventDefault();
+            event.stopPropagation();
+            openGame(gameId);
+        }
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // 先加载游戏数据
+            loadGames().then(() => {
+                // 在游戏数据加载完成后才处理路由
+                handleRouting();
+            }).catch(error => {
+                console.error('游戏数据加载失败:', error);
+            });
+        });
+
+        // 高级分类系统实现
+        function enhancedCategorySystem() {
+            // 定义分类层次结构
+            const categoryHierarchy = {
+                'Action': ['Adventure', 'Fighting', 'Platformer', 'Survival'],
+                'Puzzle': ['Logic', 'Math', 'Physics', 'Word'],
+                'Strategy': ['Card', 'Board', 'Tower Defense', 'Management'],
+                'Shooting': ['FPS', 'TPS', 'Space Shooter', 'Zombie'],
+                'Sports': ['Football', 'Basketball', 'Racing', 'Simulation'],
+                'RPG': ['MMORPG', 'Action RPG', 'Fantasy', 'Sci-Fi'],
+                'Arcade': ['Classic', 'Retro', 'Casual', '2D']
+            };
+            
+            // 提取所有游戏中的标签
+            const allTags = new Set();
+            games.forEach(game => {
+                (game.tags || []).forEach(tag => allTags.add(tag.toLowerCase()));
+            });
+            
+            // 创建智能分类系统
+            const smartCategories = [];
+            Object.entries(categoryHierarchy).forEach(([mainCategory, subCategories]) => {
+                // 检查是否有游戏属于这个主分类
+                const mainCategoryGames = games.filter(game => 
+                    (game.tags || []).map(t => t.toLowerCase()).includes(mainCategory.toLowerCase())
+                );
+                
+                if (mainCategoryGames.length > 0) {
+                    const category = {
+                        name: mainCategory,
+                        count: mainCategoryGames.length,
+                        subCategories: []
+                    };
+                    
+                    // 添加子分类
+                    subCategories.forEach(sub => {
+                        const subGames = games.filter(game => 
+                            (game.tags || []).map(t => t.toLowerCase()).includes(sub.toLowerCase())
+                        );
+                        
+                        if (subGames.length > 0) {
+                            category.subCategories.push({
+                                name: sub,
+                                count: subGames.length
+                            });
+                        }
+                    });
+                    
+                    smartCategories.push(category);
+                }
+            });
+            
+            // 如果游戏没有标签，尝试自动分类
+            games.forEach(game => {
+                if (!game.tags || game.tags.length === 0) {
+                    const autoTags = autoClassifyGame(game);
+                    game.tags = autoTags;
+                }
+            });
+            
+            // 更新全局分类
+            categories = smartCategories.map(cat => cat.name);
+            
+            return smartCategories;
+        }
+
+        // 通过游戏标题和描述自动分类
+        function autoClassifyGame(game) {
+            const keywords = {
+                'action': ['adventure', 'run', 'jump', 'fight', 'combat', 'action'],
+                'puzzle': ['puzzle', 'brain', 'logic', 'match', 'solve'],
+                'strategy': ['strategy', 'build', 'defense', 'tower', 'card', 'battle'],
+                'shooting': ['shoot', 'gun', 'zombie', 'fps', 'shooter'],
+                'sports': ['sport', 'football', 'soccer', 'basketball', 'race', 'racing'],
+                'rpg': ['rpg', 'role', 'fantasy', 'character', 'level up'],
+                'arcade': ['arcade', 'classic', 'retro', 'pixel']
+            };
+            
+            const text = (game.name + ' ' + game.description).toLowerCase();
+            const matchedCategories = [];
+            
+            Object.entries(keywords).forEach(([category, words]) => {
+                if (words.some(word => text.includes(word))) {
+                    matchedCategories.push(category);
+                }
+            });
+            
+            // 如果没有匹配，返回默认分类
+            return matchedCategories.length > 0 ? matchedCategories : ['action'];
+        }
+
+        // 创建高级分类导航UI
+        function createEnhancedCategoryUI() {
+            const smartCategories = enhancedCategorySystem();
+            
+            // 更新桌面分类菜单
+            const categoryMenus = document.querySelectorAll('#categoryMenu .group > div');
+            categoryMenus.forEach(menu => {
+                menu.innerHTML = `
+                    <a href="/all-games" class="block px-4 py-2 text-secondary hover:bg-secondary/5">All Games</a>
+                    ${smartCategories.map(cat => `
+                        <div class="group/sub relative">
+                            <a href="#/category/${cat.name.toLowerCase()}" 
+                               class="block px-4 py-2 text-secondary hover:bg-secondary/5 flex justify-between items-center">
+                                ${cat.name} <span class="text-xs text-gray-500">(${cat.count})</span>
+                                ${cat.subCategories.length > 0 ? '<i class="fas fa-chevron-right text-xs"></i>' : ''}
+                            </a>
+                            ${cat.subCategories.length > 0 ? `
+                                <div class="absolute left-full top-0 w-48 bg-white rounded-lg shadow-lg py-2 hidden group-hover/sub:block">
+                                    ${cat.subCategories.map(sub => `
+                                        <a href="#/category/${cat.name.toLowerCase()}/${sub.name.toLowerCase()}" 
+                                           class="block px-4 py-2 text-secondary hover:bg-secondary/5 flex justify-between items-center">
+                                            ${sub.name} <span class="text-xs text-gray-500">(${sub.count})</span>
+                                        </a>
+                                    `).join('')}
+                                </div>
+                            ` : ''}
+                        </div>
+                    `).join('')}
+                `;
+            });
+            
+            // 更新移动端分类菜单
+            const mobileCategoryMenu = document.getElementById('mobileCategoriesMenu');
+            mobileCategoryMenu.innerHTML = `
+                <a href="/all-games" class="block py-2 pl-4 text-secondary hover:text-accent">All Games</a>
+                ${smartCategories.map(cat => `
+                    <div>
+                        <a href="#/category/${cat.name.toLowerCase()}" 
+                           class="block py-2 pl-4 text-secondary hover:text-accent flex justify-between items-center">
+                            ${cat.name} <span class="text-xs text-gray-500">(${cat.count})</span>
+                        </a>
+                        ${cat.subCategories.map(sub => `
+                            <a href="#/category/${cat.name.toLowerCase()}/${sub.name.toLowerCase()}" 
+                               class="block py-2 pl-8 text-secondary hover:text-accent flex justify-between items-center">
+                                ${sub.name} <span class="text-xs text-gray-500">(${sub.count})</span>
+                            </a>
+                        `).join('')}
+                    </div>
+                `).join('')}
+            `;
+            
+            // 更新页脚分类
+            const footerCategories = document.getElementById('footerCategories');
+            footerCategories.innerHTML = smartCategories.map(cat => `
+                <li>
+                    <a href="#/category/${cat.name.toLowerCase()}" class="hover:text-white">${cat.name} Games</a>
+                </li>
+            `).join('');
+            
+            // 创建分类浏览页面
+            createCategoryBrowsePage(smartCategories);
+        }
+
+        // 添加缺失的分类浏览页面函数
+        function createCategoryBrowsePage(smartCategories) {
+            // 这个函数实际上不需要在初始化时调用，仅当访问分类浏览页面时使用
+            // 所以可以简化为空函数或简单日志
+            console.log("Category system initialized with", smartCategories.length, "categories");
+        }
+
+        // 前端路由处理
+        function handleRouting() {
+            // 获取哈希路由，去掉开头的 #
+            const path = window.location.hash.substring(1) || '/';
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            // 处理游戏详情页
+            if (path.startsWith('/game/')) {
+                const gameId = path.split('/').pop();
+                loadGameDetailsPage(gameId);
+                return;
+            }
+            
+            // 处理分类页面
+            if (path.startsWith('/category/')) {
+                const category = path.split('/').pop();
+                loadCategoryPage(category);
+                return;
+            }
+            
+            // 处理搜索页面
+            if (path === '/search' && urlParams.has('q')) {
+                const searchQuery = urlParams.get('q');
+                loadSearchResults(searchQuery);
+                return;
+            }
+            
+            // 默认加载首页
+            loadHomePage();
+        }
+
+        // 动态创建游戏详情页面
+        function loadGameDetailsPage(gameId) {
+            // 获取游戏数据
+            const game = games.find(g => g.id === gameId);
+            if (!game) {
+                window.location.href = '/'; // 如果找不到游戏，重定向到首页
+                return;
+            }
+            
+            // 创建页面HTML
+            document.title = `${game.name} | YourHomie Games`;
+            
+            // 隐藏主页内容
+            document.querySelector('header').style.display = 'none';
+            const mainContent = document.querySelector('main');
+            
+            // 获取游戏分类
+            const gameCategory = getGameCategory(game);
+            
+            // 生成标签HTML
+            const tagsHTML = (game.tags || []).map(tag => 
+                `<span class="bg-gray-200 text-secondary px-3 py-1 rounded-full text-sm">${tag}</span>`
+            ).join('');
+            
+            // 创建游戏详情页内容
+            mainContent.innerHTML = `
+                <!-- Breadcrumb Navigation -->
+                <nav class="mb-8" aria-label="Breadcrumb">
+                    <ol class="flex items-center space-x-2 text-sm">
+                        <li><a href="/" class="text-accent hover:underline">Home</a></li>
+                        <li><span class="text-gray-500 mx-1">/</span></li>
+                        <li><a href="#/category/${gameCategory.toLowerCase()}" class="text-accent hover:underline">${gameCategory} Games</a></li>
+                        <li><span class="text-gray-500 mx-1">/</span></li>
+                        <li class="text-gray-700 font-medium" aria-current="page">${game.name}</li>
+                    </ol>
+                </nav>
+
+                <!-- Game Header -->
+                <div class="flex flex-col md:flex-row gap-8 mb-12">
+                    <div class="md:w-1/3">
+                        <img 
+                            src="${game.image_url}" 
+                            alt="${game.name} screenshot" 
+                            class="w-full h-auto rounded-lg shadow-lg"
+                            onerror="this.src='https://via.placeholder.com/400x225?text=${encodeURIComponent(game.name)}';"
+                        >
+                    </div>
+                    <div class="md:w-2/3">
+                        <h1 class="text-3xl md:text-4xl font-bold mb-4">${game.name}</h1>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            ${tagsHTML}
+                        </div>
+                        <p class="text-text mb-6">${game.description}</p>
+                        <button 
+                            id="playGameBtn"
+                            class="bg-accent text-white px-8 py-3 rounded-full text-lg hover:bg-accent/90 transition-colors"
+                        >
+                            Play Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Game Iframe (initially hidden) -->
+                <div id="gameContainer" class="w-full mb-12 hidden">
+                    <div class="relative w-full bg-white rounded-lg shadow-lg overflow-hidden" style="padding-top: 56.25%;">
+                        <iframe 
+                            id="gameIframe"
+                            src="${game.textarea_link || game.url}" 
+                            class="absolute top-0 left-0 w-full h-full"
+                            frameborder="0"
+                            allowfullscreen
+                            allow="autoplay; fullscreen"
+                        ></iframe>
+                    </div>
+                </div>
+
+                <!-- Game Information -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h2 class="text-xl font-bold mb-4">How to Play</h2>
+                        <p class="text-text">Use your skills to progress through levels and achieve the highest score. Collect items, avoid obstacles, and defeat enemies.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h2 class="text-xl font-bold mb-4">Game Controls</h2>
+                        <ul class="space-y-2 text-text">
+                            <li><strong>Mouse:</strong> Click to interact</li>
+                            <li><strong>WASD or Arrow Keys:</strong> Movement</li>
+                            <li><strong>Space:</strong> Jump/Action</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h2 class="text-xl font-bold mb-4">Game Info</h2>
+                        <ul class="space-y-2">
+                            <li class="flex justify-between"><span class="text-gray-600">Category:</span> <span>${gameCategory}</span></li>
+                            <li class="flex justify-between"><span class="text-gray-600">Added:</span> <span>2023-10-15</span></li>
+                            <li class="flex justify-between"><span class="text-gray-600">Played:</span> <span>${Math.floor(Math.random() * 10000)} times</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Similar Games -->
+                <section>
+                    <h2 class="text-2xl font-bold mb-6">Similar Games You'll Love</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="similarGames">
+                        ${getSimilarGamesHTML(game)}
+                    </div>
+                </section>
+            `;
+            
+            // 添加Play Now按钮事件监听器
+            document.getElementById('playGameBtn').addEventListener('click', function() {
+                const gameContainer = document.getElementById('gameContainer');
+                gameContainer.classList.remove('hidden');
+                gameContainer.scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // 更新元数据
+            updateMetaTags(game);
+        }
+
+        // 生成相似游戏HTML
+        function getSimilarGamesHTML(currentGame) {
+            // 获取相同分类的其他游戏
+            const similarGames = games
+                .filter(game => game.id !== currentGame.id && 
+                               (game.tags || []).some(tag => (currentGame.tags || []).includes(tag)))
+                .slice(0, 4);
+            
+            if (similarGames.length === 0) {
+                return '<p class="col-span-full text-center text-gray-500">No similar games found</p>';
+            }
+            
+            return similarGames.map(game => createGameCard(game)).join('');
+        }
+
+        // 获取游戏分类
+        function getGameCategory(game) {
+            const tags = game.tags || [];
+            if (tags.includes('horror')) return 'Horror';
+            if (tags.includes('puzzle')) return 'Puzzle';
+            if (tags.includes('shooting')) return 'Shooting';
+            if (tags.includes('strategy')) return 'Strategy';
+            if (tags.includes('sports')) return 'Sports';
+            if (tags.includes('rpg')) return 'RPG';
+            if (tags.includes('arcade')) return 'Arcade';
+            return 'Action';
+        }
+
+        // 更新页面元数据
+        function updateMetaTags(game) {
+            // 更新标题和描述
+            document.querySelector('meta[name="description"]').setAttribute('content', 
+                `Play ${game.name} online for free at YourHomie Games. ${game.description.slice(0, 150)}...`);
+            
+            // 更新结构化数据
+            const structuredData = {
+                "@context": "https://schema.org",
+                "@type": "VideoGame",
+                "name": game.name,
+                "description": game.description,
+                "image": game.image_url,
+                "url": `https://yourhomie.online/game/${game.id}`,
+                "genre": getGameCategory(game),
+                "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "USD",
+                    "availability": "https://schema.org/InStock"
+                }
+            };
+            
+            // 查找现有的结构化数据脚本标签或创建一个新的
+            let scriptTag = document.querySelector('script[type="application/ld+json"]');
+            if (!scriptTag) {
+                scriptTag = document.createElement('script');
+                scriptTag.type = 'application/ld+json';
+                document.head.appendChild(scriptTag);
+            }
+            
+            scriptTag.textContent = JSON.stringify(structuredData);
+        }
+
+        // 添加缺失的路由处理函数
+        function loadCategoryPage(category) {
+            // 隐藏主页内容
+            document.querySelector('header').style.display = 'none';
+            const mainContent = document.querySelector('main');
+            
+            const categoryGames = games.filter(game => {
+                const tags = game.tags || [];
+                return tags.map(t => t.toLowerCase()).includes(category.toLowerCase());
+            });
+            
+            mainContent.innerHTML = `
+                <nav class="mb-8" aria-label="Breadcrumb">
+                    <ol class="flex items-center space-x-2 text-sm">
+                        <li><a href="/" class="text-accent hover:underline">Home</a></li>
+                        <li><span class="text-gray-500 mx-1">/</span></li>
+                        <li class="text-gray-700 font-medium" aria-current="page">${category} Games</li>
+                    </ol>
+                </nav>
+
+                <h1 class="text-3xl font-bold mb-8">${category} Games</h1>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    ${categoryGames.length > 0 
+                        ? categoryGames.map(game => createGameCard(game)).join('') 
+                        : '<p class="col-span-full text-center text-gray-500 py-12">No games found in this category.</p>'}
+                </div>
+            `;
+            
+            // 更新页面标题和元数据
+            document.title = `${category} Games | YourHomie Games`;
+            document.querySelector('meta[name="description"]').setAttribute('content', 
+                `Play the best ${category.toLowerCase()} games online for free at YourHomie Games.`);
+        }
+
+        function loadSearchResults(query) {
+            // 隐藏主页内容
+            document.querySelector('header').style.display = 'none';
+            const mainContent = document.querySelector('main');
+            
+            const searchResults = games.filter(game => 
+                game.name.toLowerCase().includes(query.toLowerCase()) || 
+                game.description.toLowerCase().includes(query.toLowerCase())
+            );
+            
+            mainContent.innerHTML = `
+                <nav class="mb-8" aria-label="Breadcrumb">
+                    <ol class="flex items-center space-x-2 text-sm">
+                        <li><a href="/" class="text-accent hover:underline">Home</a></li>
+                        <li><span class="text-gray-500 mx-1">/</span></li>
+                        <li class="text-gray-700 font-medium" aria-current="page">Search Results</li>
+                    </ol>
+                </nav>
+
+                <h1 class="text-3xl font-bold mb-8">Search Results for "${query}"</h1>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    ${searchResults.length > 0 
+                        ? searchResults.map(game => createGameCard(game)).join('') 
+                        : '<p class="col-span-full text-center text-gray-500 py-12">No games found matching your search.</p>'}
+                </div>
+            `;
+            
+            // 更新页面标题和元数据
+            document.title = `Search: ${query} | YourHomie Games`;
+            document.querySelector('meta[name="description"]').setAttribute('content', 
+                `Search results for "${query}" - Free online games at YourHomie Games.`);
+        }
+
+        function loadHomePage() {
+            // 显示首页内容
+            document.querySelector('header').style.display = 'block';
+            
+            // 重新加载特色游戏和分类
+            loadFeaturedGames();
+            loadGameCategories();
+            
+            // 更新页面标题和元数据
+            document.title = "YourHomie Games | Premium Online Gaming Hub";
+            document.querySelector('meta[name="description"]').setAttribute('content', 
+                "Play 1000+ free online games including action, puzzle, shooting, strategy and more. Start playing now on YourHomie Games - your premium online gaming destination.");
+        }
+
+        // 添加哈希变化监听器
+        window.addEventListener('hashchange', handleRouting);
+
+        // 改进错误处理
+        window.addEventListener('error', function(event) {
+            console.error('全局错误:', event.error);
+            // 记录错误但不中断用户体验
+        });
+
+        // 捕获加载过程中的未处理异常
+        window.addEventListener('unhandledrejection', function(event) {
+            console.error('未处理的Promise拒绝:', event.reason);
+            // 可以在这里添加更友好的错误提示
+        });
+
+        // 添加前端路由链接处理
+        document.addEventListener('click', function(e) {
+            // 找到最近的链接元素
+            let target = e.target;
+            while (target && target.tagName !== 'A') {
+                target = target.parentNode;
+                if (!target) return;
+            }
+            
+            // 检查是否是内部页面链接
+            const href = target.getAttribute('href');
+            if (!href || href.startsWith('http') || href.startsWith('#') || href === '/') {
+                return; // 外部链接或非路由链接，使用默认行为
+            }
+            
+            // 阻止默认的导航行为
+            e.preventDefault();
+            
+            // 更新URL（不刷新页面）
+            window.history.pushState(null, '', href);
+            
+            // 处理路由
+            handleRouting();
+        });
+
+        // 同时修改 handleRouting 函数来支持 popstate 事件
+        window.addEventListener('popstate', handleRouting);
+
+        // 添加显示游戏详情的函数
+        function showGameDetails(gameId) {
+            // 找到游戏
+            const game = games.find(g => g.id === gameId);
+            if (!game) return;
+            
+            // 打开一个更大的模态框显示详情
+            openGameDetailsModal(game);
+        }
+
+        // 游戏详情模态框
+        function openGameDetailsModal(game) {
+            // 获取游戏分类
+            const gameCategory = getGameCategory(game);
+            
+            // 生成标签HTML
+            const tagsHTML = (game.tags || []).map(tag => 
+                `<span class="bg-gray-200 text-secondary px-3 py-1 rounded-full text-sm">${tag}</span>`
+            ).join('');
+            
+            const modal = document.getElementById('gameModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+            
+            modalTitle.textContent = game.name;
+            modalContent.innerHTML = `
+                <div class="flex flex-col gap-6">
+                    <div>
+                        <p class="text-text mb-4">${game.description}</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            ${tagsHTML}
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                        <div class="bg-gray-100 p-4 rounded">
+                            <h4 class="font-bold mb-2">Category</h4>
+                            <p>${gameCategory}</p>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded">
+                            <h4 class="font-bold mb-2">Added</h4>
+                            <p>2023-10-15</p>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded">
+                            <h4 class="font-bold mb-2">Played</h4>
+                            <p>${Math.floor(Math.random() * 10000)} times</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white border border-gray-200 rounded-lg p-4 mb-6">
+                        <h4 class="font-bold mb-2">How to Play</h4>
+                        <p>Use your skills to progress through levels and achieve the highest score. Collect items, avoid obstacles, and defeat enemies.</p>
+                    </div>
+                    
+                    <button id="playNowBtn" class="bg-accent text-white px-6 py-3 rounded-full w-full">
+                        Play Now
+                    </button>
+                    
+                    <div id="gameIframeContainer" class="hidden mt-4">
+                        <div class="relative w-full" style="padding-top: 56.25%;">
+                            <iframe 
+                                src="${game.textarea_link || game.url}" 
+                                class="absolute top-0 left-0 w-full h-full"
+                                frameborder="0"
+                                allowfullscreen
+                                allow="autoplay; fullscreen"
+                            ></iframe>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // 显示模态框
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            // 处理Play Now按钮点击
+            document.getElementById('playNowBtn').addEventListener('click', function() {
+                document.getElementById('gameIframeContainer').classList.remove('hidden');
+                this.classList.add('hidden');
+            });
+        }
     </script>
 </body>
-</html>
+</html> 
